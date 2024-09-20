@@ -17,7 +17,7 @@ def main():
 
     # initialize Player obj in center of screen
     x = SCREEN_WIDTH / 2
-    y = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
     player = Player(x, y)
 
     # game loop
