@@ -1,8 +1,10 @@
 # this allows us to use code from the open-source pygame
 # library throughout this file
 import pygame
-# import all from constants.py
+# import from local modules
 from constants import *
+from player import Player
+from circleshape import CircleShape
 
 def main():
     # initialize pygame and set screen size
@@ -13,6 +15,11 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    # initialize Player obj in center of screen
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_WIDTH / 2
+    player = Player(x, y)
+
     # game loop
     while True:
         for event in pygame.event.get():
@@ -20,6 +27,7 @@ def main():
                 return
 
         screen.fill((0,0,0))
+        player.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
