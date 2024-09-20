@@ -5,6 +5,8 @@ import pygame
 from constants import *
 from player import Player
 from circleshape import CircleShape
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     # initialize pygame and set screen size
@@ -12,9 +14,12 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     # initialize object groups
+    asteroids = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
 
     # initialize a new clock object and delta time variable
     clock = pygame.time.Clock()
@@ -25,6 +30,8 @@ def main():
     y = SCREEN_HEIGHT / 2
     player = Player(x, y)
 
+    # initialize Asteroid Field
+    a_field = AsteroidField()
 
     # game loop
     while True:
@@ -35,6 +42,7 @@ def main():
         screen.fill((0,0,0))
         for obj in updatable:
             obj.update(dt)
+        for obj in drawable:
             obj.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
